@@ -3,7 +3,8 @@ BingNiceWallpapers can fetch background images at http://www.bing.com/?mkt=zh-CN
 
 
 # TODO List
- - Remove Arrows on Shortcut Icons on Windows
+ - [Remove Arrows on Shortcut Icons on Windows](http://www.howtogeek.com/howto/windows-vista/disable-shortcut-icon-arrow-overlay-in-windows-vista/)
+
  - macOS support
 
 # Run the program 
