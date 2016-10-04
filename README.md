@@ -1,5 +1,5 @@
 # BingNiceWallpapers
-BingNiceWallpapers can fetch background images at http://www.bing.com/?mkt=zh-CN and set them as the wallpaper of your PC desktop, currently working on Windows and Linux Genome desktop. Windows binary installer and more information http://mathjoy.lofter.com/post/42208d_7cabcf7
+BingNiceWallpapers can fetch background images at http://www.bing.com/?mkt=zh-CN and set them as the wallpaper of your PC desktop, **one click to the system tray icon to change the wallpaper**, currently working on Windows and Linux Genome desktop. Windows binary installer and more information http://mathjoy.lofter.com/post/42208d_7cabcf7
 
 
 # TODO List
