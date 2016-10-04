@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="/">
+    <file>icons/edit-undo.png</file>
+    <file>icons/emblem-favorite.png</file>
+    <file>icons/emblem-system.png</file>
+    <file>icons/emblem-unreadable.png</file>
+    <file>icons/icon1px.png</file>
+  </qresource>
+</RCC>

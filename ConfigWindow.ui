@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>790</width>
+    <height>488</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>设置 - 必应好壁纸</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="icon.qrc">
+    <normaloff>:/icons/icon1px.png</normaloff>:/icons/icon1px.png</iconset>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_5">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>设置</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>壁纸所在位置</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="storePathEdit">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="browseButton">
+           <property name="text">
+            <string>更改</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="open">
+           <property name="text">
+            <string>打开</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>收藏的壁纸所在位置</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="storePathEdit_2">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="browseButton_2">
+           <property name="text">
+            <string>更改</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="open_2">
+           <property name="text">
+            <string>打开</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>自动更换壁纸的时间间隔（分钟）</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTimeEdit" name="timeEdit">
+           <property name="maximumTime">
+            <time>
+             <hour>0</hour>
+             <minute>59</minute>
+             <second>0</second>
+            </time>
+           </property>
+           <property name="minimumTime">
+            <time>
+             <hour>0</hour>
+             <minute>1</minute>
+             <second>0</second>
+            </time>
+           </property>
+           <property name="displayFormat">
+            <string>mm</string>
+           </property>
+           <property name="time">
+            <time>
+             <hour>0</hour>
+             <minute>10</minute>
+             <second>0</second>
+            </time>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="autoRun">
+         <property name="text">
+          <string>开机启动</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>关于</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>本软件</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;必应好壁纸：每一张令人心旷神怡的壁纸后面都有一个真实的故事让你心动，让必应壁纸带你环球旅行吧，换一张壁纸，换一种心情！&lt;/p&gt;&lt;p&gt;必应好壁纸每天都会为你更新来自微软&lt;a href=&quot;http://cn.bing.com/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;必应搜索&lt;/span&gt;&lt;/a&gt;的壁纸！&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;鼠标左击本软件的图标可以更换壁纸，右击显示功能菜单，此外本软件也会在指定的时间间隔自动更换壁纸。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;如果你有收藏了的壁纸，那么当你把它们放到本软件的壁纸库后，本软件就会使用它们来作为更换的壁纸。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;本软件会自动提示你更新到最新版。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;将壁纸作为电脑壁纸外的其它用途将可能导致微软找你聊聊，壁纸版权请联系微软或必应。&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;软件主页：&lt;/span&gt;&lt;a href=&quot;http://mathjoy.lofter.com/post/42208d_7cabcf7&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://mathjoy.lofter.com/post/42208d_7cabcf7&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;问题反馈：redstone-cold@163.com&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;用户QQ群（iMath软件）：&lt;/span&gt;&lt;a href=&quot;http://shang.qq.com/wpa/qunwpa?idkey=2bde057aaff9c01f5b898cc197fe442925c773cc3e3b637fc79eaa1e600d2470&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;272830154&lt;/span&gt;&lt;/a&gt; （点击群号即可加群）&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="openExternalLinks">
+             <bool>true</bool>
+            </property>
+            <property name="textInteractionFlags">
+             <set>Qt::TextBrowserInteraction</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="title">
+          <string>我</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;你好！我喜欢数学、物理、编程（专Python、PyQt）、国语动画、国语布袋戏、看书、看杂志、音乐、乒乓球、羽毛球。&lt;/p&gt;&lt;p&gt;如果你在软件方面有比较具有创意的点子，但你又不会写软件，那么不妨和我谈谈，我可能帮你把它给做出来哟！&lt;/p&gt;&lt;p&gt;欢迎光临我的专页：&lt;a href=&quot;http://mathjoy.lofter.com/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://mathjoy.lofter.com/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="openExternalLinks">
+             <bool>true</bool>
+            </property>
+            <property name="textInteractionFlags">
+             <set>Qt::TextBrowserInteraction</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <spacer>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>71</width>
+         <height>31</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="okButton">
+       <property name="text">
+        <string>确认</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="text">
+        <string>取消</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="icon.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>okButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Dialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>278</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>96</x>
+     <y>254</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cancelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Dialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>369</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>179</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
