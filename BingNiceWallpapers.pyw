@@ -345,7 +345,7 @@ class BingNiceWallpapers(QSystemTrayIcon):
         content = str(pageSrc.data(), 'utf-8')
 
         if '必应好壁纸' in content:
-            if '2015-8-15' in content:
+            if '2016-10-15' in content:
                 print('no NewVersion')
 
             else:
