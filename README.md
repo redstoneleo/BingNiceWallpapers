@@ -6,7 +6,7 @@ BingNiceWallpapers can fetch background images at http://www.bing.com/?mkt=zh-CN
  - [Remove Arrows on Shortcut Icons on Windows](http://www.howtogeek.com/howto/windows-vista/disable-shortcut-icon-arrow-overlay-in-windows-vista/)
 
  - macOS support
- - KDE desktop support
+ - [KDE desktop support](https://github.com/redstoneleo/BingNiceWallpapers/issues/1)
 
 # Run the program 
 Python 3 and PyQt5 installed, you need also install [pywin32](http://sourceforge.net/projects/pywin32/files/) on Windows 
