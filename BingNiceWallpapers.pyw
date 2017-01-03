@@ -84,9 +84,8 @@ class BingNiceWallpapers(QSystemTrayIcon):
         else:
             imageNum = 24  # QDateTime.currentDateTime().date().day()
 
-        for i in range(imageNum, -1, -1):  # 倒着来是为了最后一次总可以下载到壁纸，以便后面更新今日壁纸
+        for i in range(imageNum - 1, -1, -1):  # 倒着来是为了最后一次总可以下载到壁纸，以便后面更新今日壁纸
             queryUrl = 'http://cn.bing.com/HPImageArchive.aspx?format=js&idx={}&n=1&nc=1421741858945&pid=hp'.format(i)
-            print(queryUrl)
             self.prepareReply(queryUrl)
 
     def prepareReply(self, url):
@@ -120,7 +119,7 @@ class BingNiceWallpapers(QSystemTrayIcon):
             return
 
         picInfo = json.loads(content)
-        imageUrl = picInfo['images'][0]["url"]
+        imageUrl = 'http://cn.bing.com' + picInfo['images'][0]["url"]
         imageName = picInfo['images'][0]["copyright"].split('(')[0].rstrip()
 
         reply = self.getReply(imageUrl)
@@ -345,7 +344,7 @@ class BingNiceWallpapers(QSystemTrayIcon):
         content = str(pageSrc.data(), 'utf-8')
 
         if '必应好壁纸' in content:
-            if '2016-10-15' in content:
+            if '2017-1-3' in content:
                 print('no NewVersion')
 
             else:
