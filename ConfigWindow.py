@@ -32,7 +32,7 @@ class ConfigWindow(QDialog, Ui_Dialog):
         self.storePathEdit.setText(
             os.path.join(settings.value("pathToWallpaperDir"), '必应好壁纸壁纸库'))
         self.storePathEdit_2.setText(
-            os.path.join(settings.value("pathToLikedWallpaperDir"), '收藏的壁纸'))
+            os.path.join(settings.value("pathToLikedWallpaperDir"), '收藏的必应壁纸'))
 
         self.timeEdit.setTime(
             QTime(0, 0, 0, 0).addMSecs(int(settings.value("timeoutInterval"))))
@@ -65,7 +65,7 @@ class ConfigWindow(QDialog, Ui_Dialog):
         # 如果取消QFileDialog.getExistingDirectory的话，那么得到的就是  ‘’    and if
         if pathToLikedWallpaperDir != '':
             self.storePathEdit_2.setText(
-                os.path.join(pathToLikedWallpaperDir, '收藏的壁纸'))
+                os.path.join(pathToLikedWallpaperDir, '收藏的必应壁纸'))
             self.pathToLikedWallpaperDir = pathToLikedWallpaperDir
 
         # else:
@@ -74,13 +74,13 @@ class ConfigWindow(QDialog, Ui_Dialog):
 
     @pyqtSlot()
     def on_open_clicked(self):
-        #壁纸库
+        # 壁纸库
         if os.path.exists(self.storePathEdit.text()):  # 更改路径后，新路径还未存在
             QDesktopServices.openUrl(QUrl.fromLocalFile(self.storePathEdit.text()))
 
     @pyqtSlot()
     def on_open_2_clicked(self):
-        #收藏的壁纸
+        # 收藏的必应壁纸
         if os.path.exists(self.storePathEdit_2.text()):
             QDesktopServices.openUrl(QUrl.fromLocalFile(self.storePathEdit_2.text()))
 
