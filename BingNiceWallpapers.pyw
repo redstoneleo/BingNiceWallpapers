@@ -12,6 +12,21 @@ import icon_rc
 import autorun
 import random
 
+
+# 记录错误
+import logging
+import logging.handlers
+twoNewlineHandler = logging.handlers.RotatingFileHandler(filename=os.path.join(QStandardPaths.writableLocation(QStandardPaths.MoviesLocation), 'BingNiceWallpapers.log'), maxBytes=1024 * 1024, backupCount=1)
+twoNewlineHandler.terminator = os.linesep * 2
+logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d %I:%M:%S %p', handlers=[twoNewlineHandler])
+def uncaughtExceptionHandler(type_, value, traceback):
+    print(type_, value, traceback)
+    # 因为基本上在主程序之后运行，所以不需要自建application
+    logging.error("Uncaught exception", exc_info=(type_, value, traceback))
+    sys.exit(1)
+sys.excepthook = uncaughtExceptionHandler
+
+
 if sys.platform.startswith('win32'):
     import win32con
     import win32gui
@@ -158,14 +173,18 @@ class BingNiceWallpapers(QSystemTrayIcon):
 
     def createContextMenu(self):
         trayIconMenu = QMenu()
-        self.likeCurrentWallpaperAction = QAction("收藏当前壁纸", self, icon=QIcon(':/icons/emblem-favorite.png'), triggered=self.likeCurrentWallpaper)  # 因为要全局引用，所以加self
-        self.lastWallpaperAction = QAction("上一张", self, icon=QIcon(':/icons/edit-undo.png'), triggered=lambda: self.setWallpaper(self.lastWallpaper))
-        setAction = QAction("设置", self, icon=QIcon(':/icons/emblem-system.png'), triggered=self.on_options_triggered)
-        quitAction = QAction("退出", self, icon=QIcon(':/icons/emblem-unreadable.png'), triggered=qApp.quit)
+        changeWallpaperAction = QAction("换壁纸", self, icon=QIcon(':/icons/update.png'), toolTip ='建议点击托盘图标更换壁纸',triggered=lambda:self.changeWallpaper())
+        self.likeCurrentWallpaperAction = QAction("收藏当前壁纸", self, icon=QIcon(':/icons/like.png'), triggered=self.likeCurrentWallpaper)  # 因为要全局引用，所以加self
+        self.lastWallpaperAction = QAction("上一张", self, icon=QIcon(':/icons/last.png'), triggered=lambda: self.setWallpaper(self.lastWallpaper))
+        self.removeAction = QAction("删除当前壁纸", self, icon=QIcon(':/icons/delete.png'), triggered=self.removeCurrentWallpaper)
+        setAction = QAction("更多功能", self, icon=QIcon(':/icons/more.png'), triggered=self.on_options_triggered)
+        quitAction = QAction("退出", self, icon=QIcon(':/icons/quit.png'), triggered=qApp.quit)
 
         trayIconMenu.addAction(self.likeCurrentWallpaperAction)
         trayIconMenu.addAction(self.lastWallpaperAction)
+        trayIconMenu.addAction(self.removeAction)
         trayIconMenu.addAction(setAction)
+        trayIconMenu.addAction(changeWallpaperAction)
         trayIconMenu.addAction(quitAction)
 
         self.setContextMenu(trayIconMenu)
@@ -174,6 +193,11 @@ class BingNiceWallpapers(QSystemTrayIcon):
         if os.path.exists(self.getCurrentWallpaperPath()):  # 还是要检查的，有时候根本没有当前壁纸，一片漆黑
             shutil.copy2(self.getCurrentWallpaperPath(), self.likedWallpaperDir)
             self.showMessage('收藏成功！', '点击本信息打开存放的位置')
+
+    def removeCurrentWallpaper(self):
+        if os.path.exists(self.getCurrentWallpaperPath()):  # 还是要检查的，有时候根本没有当前壁纸，一片漆黑
+            os.remove(self.getCurrentWallpaperPath())
+            self.changeWallpaper()
 
     def getCurrentWallpaperPath(self):
 
@@ -231,14 +255,14 @@ class BingNiceWallpapers(QSystemTrayIcon):
 
     def readSettings(self):
         self.settings = QSettings(QSettings.IniFormat, QSettings.UserScope, "iMath", "BingNiceWallpapers")
-        appDataLocation = QStandardPaths.writableLocation(QStandardPaths.AppDataLocation)
+        appDataLocation = os.path.dirname(self.settings.fileName())  # (QStandardPaths.AppDataLocation)
         self.pathToWallpaperDir = self.settings.value("pathToWallpaperDir", appDataLocation)  # 当第一次在U盘里运行，关闭后，然后copy到电脑上运行，就会得出invalid路径
-        self.pathToLikedWallpaperDir = self.settings.value("pathToLikedWallpaperDir", appDataLocation)  # 当第一次在U盘里运行，关闭后，然后copy到电脑上运行，就会得出invalid路径
+        self.pathToLikedWallpaperDir = self.settings.value("pathToLikedWallpaperDir", QStandardPaths.writableLocation(QStandardPaths.PicturesLocation))  # 当第一次在U盘里运行，关闭后，然后copy到电脑上运行，就会得出invalid路径
 
         self.timeoutInterval = int(self.settings.value("timeoutInterval", 600000))
 
         self.wallpaperDir = os.path.join(self.pathToWallpaperDir, '必应好壁纸壁纸库')
-        self.likedWallpaperDir = os.path.join(self.pathToLikedWallpaperDir, '收藏的壁纸')
+        self.likedWallpaperDir = os.path.join(self.pathToLikedWallpaperDir, '收藏的必应壁纸')
         #print('before--------------', self.wallpaperDir)
         if os.path.exists(self.wallpaperDir) == False:  # 用户可能删除Wallpapers这个文件夹
             self.pathToWallpaperDir = appDataLocation
@@ -250,8 +274,8 @@ class BingNiceWallpapers(QSystemTrayIcon):
                 pass
 
         if not os.path.exists(self.likedWallpaperDir):
-            self.pathToLikedWallpaperDir = appDataLocation
-            self.likedWallpaperDir = os.path.join(self.pathToLikedWallpaperDir, '收藏的壁纸')
+            self.pathToLikedWallpaperDir = QStandardPaths.writableLocation(QStandardPaths.PicturesLocation)
+            self.likedWallpaperDir = os.path.join(self.pathToLikedWallpaperDir, '收藏的必应壁纸')
             try:
                 os.makedirs(self.likedWallpaperDir)
             except FileExistsError:
@@ -281,6 +305,7 @@ class BingNiceWallpapers(QSystemTrayIcon):
             else:
                 self.likeCurrentWallpaperAction.setText('收藏当前壁纸')
             self.likeCurrentWallpaperAction.setEnabled(os.path.exists(currentWallpaperPath) and not isLiked)
+            self.removeAction.setEnabled(os.path.exists(currentWallpaperPath))
 
             self.lastWallpaperAction.setEnabled(os.path.exists(self.lastWallpaper))
         else:
