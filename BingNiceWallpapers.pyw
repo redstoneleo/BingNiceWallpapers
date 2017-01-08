@@ -23,7 +23,7 @@ def uncaughtExceptionHandler(type_, value, traceback):
     print(type_, value, traceback)
     # 因为基本上在主程序之后运行，所以不需要自建application
     logging.error("Uncaught exception", exc_info=(type_, value, traceback))
-    sys.exit(1)
+    # sys.exit(1)
 sys.excepthook = uncaughtExceptionHandler
 
 
@@ -242,8 +242,7 @@ class BingNiceWallpapers(QSystemTrayIcon):
             print('self.timeoutInterval------------', self.timeoutInterval)
             self.timer.start(self.timeoutInterval)
 
-            print('exists("test_xxx")---------',
-                  autorun.exists("BingNiceWallpapers"), sys.argv[0])
+            print('exists("test_xxx")---------',autorun.exists("BingNiceWallpapers"), sys.argv[0])
             if settingsDialog.autoRun.isChecked():
                 autorun.add("BingNiceWallpapers", sys.argv[0])
             else:
@@ -333,8 +332,6 @@ class BingNiceWallpapers(QSystemTrayIcon):
             self.setToolTip('{}\n\n点击更换壁纸'.format(os.path.basename(os.path.splitext(imagePath)[0])))
             if sys.platform.startswith('win32'):
 
-                import winreg  # 避免跨平台module出现问题
-                winreg.SetValue(winreg.HKEY_CURRENT_USER, "Control Panel\\Desktop\\WallpaperStyle", winreg.REG_SZ, "0")
                 # winreg.DeleteKey(key, sub_key)去除快捷方式小箭头，有待实现
 
                 # with winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Control
