@@ -27,5 +27,6 @@ BingNiceWallpapers can get background images from http://www.bing.com/?mkt=zh-CN
    `Python3 BingNiceWallpapers.pyw`
 
 3. Here we go!
+
 # License
 GPL
