@@ -100,28 +100,17 @@
          <item>
           <widget class="QLabel" name="label_3">
            <property name="text">
-            <string>自动更换壁纸的时间间隔（分钟）</string>
+            <string>自动更换壁纸的时间间隔（时：分：秒）</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QTimeEdit" name="timeEdit">
-           <property name="maximumTime">
-            <time>
-             <hour>0</hour>
-             <minute>59</minute>
-             <second>0</second>
-            </time>
-           </property>
-           <property name="minimumTime">
-            <time>
-             <hour>0</hour>
-             <minute>1</minute>
-             <second>0</second>
-            </time>
+           <property name="currentSection">
+            <enum>QDateTimeEdit::MinuteSection</enum>
            </property>
            <property name="displayFormat">
-            <string>mm</string>
+            <string>HH:mm:ss</string>
            </property>
            <property name="time">
             <time>

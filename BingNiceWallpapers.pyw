@@ -238,7 +238,7 @@ class BingNiceWallpapers(QSystemTrayIcon):
                 shutil.move(self.likedWallpaperDir, self.pathToLikedWallpaperDir)
                 self.likedWallpaperDir = settingsDialog.storePathEdit_2.text()
 
-            self.timeoutInterval = settingsDialog.timeEdit.time().minute() * 60 * 1000
+            self.timeoutInterval = settingsDialog.timeEdit.time().msecsSinceStartOfDay()
             print('self.timeoutInterval------------', self.timeoutInterval)
             self.timer.start(self.timeoutInterval)
 

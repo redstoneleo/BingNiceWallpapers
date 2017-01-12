@@ -34,8 +34,7 @@ class ConfigWindow(QDialog, Ui_Dialog):
         self.storePathEdit_2.setText(
             os.path.join(settings.value("pathToLikedWallpaperDir"), '收藏的必应壁纸'))
 
-        self.timeEdit.setTime(
-            QTime(0, 0, 0, 0).addMSecs(int(settings.value("timeoutInterval"))))
+        self.timeEdit.setTime(QTime.fromMSecsSinceStartOfDay(int(settings.value("timeoutInterval"))))
 
     @pyqtSlot()
     def on_browseButton_clicked(self):
