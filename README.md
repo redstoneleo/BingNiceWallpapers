@@ -4,7 +4,7 @@
 # BingNiceWallpapers
 BingNiceWallpapers can get background images from http://www.bing.com/?mkt=zh-CN and set them as your desktop wallpaper by just a **single click on system tray icon**.
 
- For Windows binary installer and more information, please refer to http://mathjoy.lofter.com/post/42208d_7cabcf7 (written in simplified Chinese)
+ For Windows binary installer and more information, please refer to http://www.cnblogs.com/iMath/p/BingNiceWallpapers.html (written in simplified Chinese)
 # Features
 
  - Changing wallpaper in a **single click on system tray icon** or after
