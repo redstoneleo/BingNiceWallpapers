@@ -18,15 +18,15 @@ BingNiceWallpapers can get background images from http://www.bing.com/?mkt=zh-CN
  - [KDE desktop support](https://github.com/redstoneleo/BingNiceWallpapers/issues/1)
 
 # Run the program 
-1. Python 3 and PyQt5 are required.
+1. Download https://github.com/redstoneleo/BingNiceWallpapers/archive/master.zip and extract the zip archive.
+2. Python 3 and PyQt5(`sudo pip3 install PyQt5`) are required.
 
    Windows users also need to install [PyWin32](http://sourceforge.net/projects/pywin32/files/).
 
-2. Execute the command below to launch **BingNiceWallpapers**:
+3. Execute the command below to launch **BingNiceWallpapers**:
 
-   `Python3 BingNiceWallpapers.pyw`
+   `sudo python3 BingNiceWallpapers.pyw`
 
-3. Here we go!
 
 # License
 GPL
