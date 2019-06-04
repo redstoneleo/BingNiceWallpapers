@@ -8,7 +8,7 @@ import json
 import sys
 import shutil
 import subprocess
-import icon_rc
+# import icon_rc
 import autorun
 import random
 
@@ -16,7 +16,11 @@ import random
 # 记录错误
 import logging
 import logging.handlers
-twoNewlineHandler = logging.handlers.RotatingFileHandler(filename=os.path.join(QStandardPaths.writableLocation(QStandardPaths.MoviesLocation), 'BingNiceWallpapers.log'), maxBytes=1024 * 1024, backupCount=1)
+appDataDir = os.path.join(QStandardPaths.writableLocation(QStandardPaths.AppDataLocation), 'ek')
+print(appDataDir)
+os.makedirs(appDataDir, exist_ok=True)  # exist_ok=True 意味着若存在就不会创建了
+
+twoNewlineHandler = logging.handlers.RotatingFileHandler(filename=os.path.join(appDataDir, 'BingNiceWallpapers.log'), maxBytes=1024 * 1024, backupCount=1)
 twoNewlineHandler.terminator = os.linesep * 2
 logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d %I:%M:%S %p', handlers=[twoNewlineHandler])
 def uncaughtExceptionHandler(type_, value, traceback):
@@ -102,6 +106,7 @@ class BingNiceWallpapers(QSystemTrayIcon):
         for i in range(imageNum - 1, -1, -1):  # 倒着来是为了最后一次总可以下载到壁纸，以便后面更新今日壁纸
             queryUrl = 'http://cn.bing.com/HPImageArchive.aspx?format=js&idx={}&n=1&nc=1421741858945&pid=hp'.format(i)
             self.prepareReply(queryUrl)
+        QTimer.singleShot(86400*1000, lambda: self.getJson())#之前必须是电脑重启开机才有壁纸，为了避免用户不关机只休眠也有壁纸，故如此
 
     def prepareReply(self, url):
         reply = self.getReply(url)
@@ -226,7 +231,7 @@ class BingNiceWallpapers(QSystemTrayIcon):
         # flags=0): argument 1 has unexpected type 'BingNiceWallpapers'
         settingsDialog = ConfigWindow(None, self.settings)
 
-        if settingsDialog.exec() == QDialog.Accepted:
+        if settingsDialog.exec_() == QDialog.Accepted:
             # 如果目的地存在wallpaperDir同名文件夹会出错
             if not os.path.exists(settingsDialog.storePathEdit.text()):
                 self.pathToWallpaperDir = settingsDialog.pathToWallpaperDir
@@ -243,6 +248,7 @@ class BingNiceWallpapers(QSystemTrayIcon):
             self.timer.start(self.timeoutInterval)
 
             print('exists("test_xxx")---------',autorun.exists("BingNiceWallpapers"), sys.argv[0])
+            
             if settingsDialog.autoRun.isChecked():
                 autorun.add("BingNiceWallpapers", sys.argv[0])
             else:
@@ -254,15 +260,16 @@ class BingNiceWallpapers(QSystemTrayIcon):
 
     def readSettings(self):
         self.settings = QSettings(QSettings.IniFormat, QSettings.UserScope, "iMath", "BingNiceWallpapers")
-        appDataLocation = os.path.dirname(self.settings.fileName())  # (QStandardPaths.AppDataLocation)
-        self.pathToWallpaperDir = self.settings.value("pathToWallpaperDir", appDataLocation)  # 当第一次在U盘里运行，关闭后，然后copy到电脑上运行，就会得出invalid路径
+        appDataLocation = QStandardPaths.writableLocation(QStandardPaths.PicturesLocation)#os.path.dirname(self.settings.fileName())  # (QStandardPaths.AppDataLocation)
+        # print(appDataLocation,appDataDir)
+        self.pathToWallpaperDir = self.settings.value("pathToWallpaperDir", QStandardPaths.writableLocation(QStandardPaths.PicturesLocation))  # 当第一次在U盘里运行，关闭后，然后copy到电脑上运行，就会得出invalid路径
         self.pathToLikedWallpaperDir = self.settings.value("pathToLikedWallpaperDir", QStandardPaths.writableLocation(QStandardPaths.PicturesLocation))  # 当第一次在U盘里运行，关闭后，然后copy到电脑上运行，就会得出invalid路径
 
         self.timeoutInterval = int(self.settings.value("timeoutInterval", 600000))
 
         self.wallpaperDir = os.path.join(self.pathToWallpaperDir, '必应好壁纸壁纸库')
         self.likedWallpaperDir = os.path.join(self.pathToLikedWallpaperDir, '收藏的必应壁纸')
-        #print('before--------------', self.wallpaperDir)
+        # print('before--------------', self.wallpaperDir,appDataLocation)
         if os.path.exists(self.wallpaperDir) == False:  # 用户可能删除Wallpapers这个文件夹
             self.pathToWallpaperDir = appDataLocation
             self.wallpaperDir = os.path.join(self.pathToWallpaperDir, '必应好壁纸壁纸库')
@@ -288,13 +295,13 @@ class BingNiceWallpapers(QSystemTrayIcon):
         self.settings.setValue("pathToLikedWallpaperDir", self.pathToLikedWallpaperDir)
 
 #
-#    @pyqtSlot()
+#    @pyqtpyqtSlot()
 #    def closeEvent(self):
 
 #        self.writeSettings()
 #
 #        print('close???????')
-
+    # @pyqtpyqtSlot(int)
     def iconActivated(self, reason):  # 点击托盘图标随即更换壁纸
         if reason == QSystemTrayIcon.Context:
             currentWallpaperPath = self.getCurrentWallpaperPath()
@@ -357,7 +364,7 @@ class BingNiceWallpapers(QSystemTrayIcon):
                 self.process.start("gsettings", ['set', 'org.gnome.desktop.background', 'picture-uri', QUrl.fromLocalFile(imagePath).toString()])
 
     def checkUpdate(self):
-        reply = self.getReply('http://mathjoy.lofter.com/post/42208d_7cabcf7')
+        reply = self.getReply('https://www.cnblogs.com/iMath/p/BingNiceWallpapers.html')
         reply.finished.connect(self.checkNewVersion)
 
     def checkNewVersion(self):
@@ -366,13 +373,13 @@ class BingNiceWallpapers(QSystemTrayIcon):
         content = str(pageSrc.data(), 'utf-8')
 
         if '必应好壁纸' in content:
-            if '2017-1-3' in content:
+            if '2019-06-06' in content:
                 print('no NewVersion')
 
             else:
                 print('has NewVersion')
                 standardButton = QMessageBox.information(
-                    None, '发现新版本', '确认后将前往官网下载最新版 <strong>必应好壁纸</strong>')
+                    self, '发现新版本', '确认后将前往官网下载最新版 <strong>必应好壁纸</strong>')
                 if standardButton == QMessageBox.Ok:
                     QDesktopServices.openUrl(reply.url())
 
@@ -381,7 +388,8 @@ class BingNiceWallpapers(QSystemTrayIcon):
             QTimer.singleShot(120000, self.checkUpdate)
 
 
-if __name__ == "__main__":
+
+def main():
     import sys
     app = QApplication(sys.argv)
     QApplication.setQuitOnLastWindowClosed(False)
@@ -389,3 +397,6 @@ if __name__ == "__main__":
     trayIcon = BingNiceWallpapers()
     trayIcon.show()
     sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()
