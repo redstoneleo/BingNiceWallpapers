@@ -17,7 +17,7 @@ import random
 import logging
 import logging.handlers
 appDataDir = os.path.join(QStandardPaths.writableLocation(QStandardPaths.AppDataLocation), 'ek')
-print(appDataDir)
+# print(appDataDir)
 os.makedirs(appDataDir, exist_ok=True)  # exist_ok=True 意味着若存在就不会创建了
 
 twoNewlineHandler = logging.handlers.RotatingFileHandler(filename=os.path.join(appDataDir, 'BingNiceWallpapers.log'), maxBytes=1024 * 1024, backupCount=1)
@@ -379,7 +379,7 @@ class BingNiceWallpapers(QSystemTrayIcon):
             else:
                 print('has NewVersion')
                 standardButton = QMessageBox.information(
-                    self, '发现新版本', '确认后将前往官网下载最新版 <strong>必应好壁纸</strong>')
+                    None, '发现新版本', '确认后将前往官网下载最新版 <strong>必应好壁纸</strong>')#parent不能是self（Inherits:  QObject），need QWidget
                 if standardButton == QMessageBox.Ok:
                     QDesktopServices.openUrl(reply.url())
 
