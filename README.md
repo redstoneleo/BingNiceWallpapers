@@ -1,3 +1,4 @@
+
 ![enter image description here](https://github.com/redstoneleo/BingNiceWallpapers/blob/master/ChMkJlbKwaKIDMeuAAnTWQNEY3QAALGbQMureEACdNx268.jpg)
 
 ![enter image description here](https://github.com/redstoneleo/BingNiceWallpapers/blob/master/ChMkJ1bKwaWIcVF5ABUGcTTq3jUAALGbgGk4T4AFQaJ382.jpg)
@@ -18,6 +19,11 @@ BingNiceWallpapers can get background images from http://www.bing.com/?mkt=zh-CN
  - [KDE desktop support](https://github.com/redstoneleo/BingNiceWallpapers/issues/1)
 
 # Run the program 
+
+ - Download and run the executable :  [Windows](https://www.cnblogs.com/iMath/p/BingNiceWallpapers.html) , [Linux](http://mathjoy.ml/FileHost/?fileName=BingNiceWallpapers) .
+
+ - Run via source code:
+
 1. Download https://github.com/redstoneleo/BingNiceWallpapers/archive/master.zip and extract the zip archive.
 2. Python 3 and PyQt5(`sudo pip3 install PyQt5`) are required.
 
