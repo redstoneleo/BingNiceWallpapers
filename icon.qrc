@@ -1,0 +1,15 @@
+<RCC>
+  <qresource prefix="/">
+    <file>icons/edit-undo.png</file>
+    <file>icons/emblem-favorite.png</file>
+    <file>icons/emblem-system.png</file>
+    <file>icons/emblem-unreadable.png</file>
+    <file>icons/icon1px.png</file>
+    <file>icons/update.png</file>
+    <file>icons/last.png</file>
+    <file>icons/more.png</file>
+    <file>icons/quit.png</file>
+    <file>icons/like.png</file>
+    <file>icons/delete.png</file>
+  </qresource>
+</RCC>
