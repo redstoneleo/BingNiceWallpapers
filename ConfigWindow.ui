@@ -107,7 +107,11 @@
          <item>
           <widget class="QTimeEdit" name="timeEdit">
            <property name="currentSection">
+<<<<<<< HEAD
             <enum>QDateTimeEdit::HourSection</enum>
+=======
+            <enum>QDateTimeEdit::MinuteSection</enum>
+>>>>>>> a9d19b1694df63504960fefae1aba696ea5de373
            </property>
            <property name="displayFormat">
             <string>HH:mm:ss</string>
@@ -221,9 +225,12 @@
        <property name="text">
         <string>确认</string>
        </property>
+<<<<<<< HEAD
        <property name="default">
         <bool>true</bool>
        </property>
+=======
+>>>>>>> a9d19b1694df63504960fefae1aba696ea5de373
       </widget>
      </item>
      <item>
